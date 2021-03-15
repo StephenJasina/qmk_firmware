@@ -155,18 +155,18 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         register_code(KC_LSFT);
         bss_timer = timer_read();
       } else {
+        unregister_code(KC_LSFT);
         if (bss_waiting && timer_elapsed(bss_timer) < 250) {
           tap_code(KC_BSPC);
         }
         bss_waiting = false;
-        unregister_code(KC_LSFT);
       }
       return false;
-  }
+    default:
+      if (bss_waiting && record->event.pressed) {
+        bss_waiting = false;
+      }
 
-  if (bss_waiting && record->event.pressed) {
-    bss_waiting = false;
+      return true;
   }
-
-  return true;
 }
