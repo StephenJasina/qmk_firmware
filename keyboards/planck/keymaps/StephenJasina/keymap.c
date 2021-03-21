@@ -92,7 +92,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 /* Lower
  * ,-----------------------------------------------------------------------------------.
- * |XXXXXX| Stop | Prev | Play | Next |XXXXXX| PgDn |XXXXXX|  Up  |XXXXXX| PgUp |XXXXXX|
+ * |XXXXXX| Stop | Prev | Play | Next |XXXXXX| PgUp |XXXXXX|  Up  |XXXXXX| PgDn |XXXXXX|
  * |------+------+------+------+------+------+------+------+------+------+------+------|
  * |XXXXXX| Bri- | Vol- | Mute | Vol+ | Bri+ | Home | Left | Down |Right | End  |XXXXXX|
  * |------+------+------+------+------+------+------+------+------+------+------+------|
@@ -102,7 +102,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * `-----------------------------------------------------------------------------------'
  */
 [_LOWER] = LAYOUT_planck_grid(
-    XXXXXXX, KC_MSTP, KC_MPRV, KC_MPLY, KC_MNXT, XXXXXXX, KC_PGDN, XXXXXXX, KC_UP  , KC_END , XXXXXXX, XXXXXXX,
+    XXXXXXX, KC_MSTP, KC_MPRV, KC_MPLY, KC_MNXT, XXXXXXX, KC_PGUP, XXXXXXX, KC_UP  , XXXXXXX, KC_PGDN, XXXXXXX,
     XXXXXXX, KC_BRID, KC_VOLD, KC_MUTE, KC_VOLU, KC_BRIU, KC_HOME, KC_LEFT, KC_DOWN, KC_RGHT, KC_END , XXXXXXX,
     KC_CAPS, KC_PSCR, KC_SLCK, KC_PAUS, KC_INS , KC_NLCK, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
     _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
