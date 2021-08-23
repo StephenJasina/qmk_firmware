@@ -3,6 +3,7 @@
 enum planck_layers {
 	_COLEMAK,
 	_QWERTY,
+	_RHYTHM,
 	_LOWER,
 	_RAISE,
 	_ADJUST,
@@ -16,6 +17,7 @@ enum planck_keycodes {
 
 #define COLEMAK DF(_COLEMAK)
 #define QWERTY DF(_QWERTY)
+#define RHYTHM DF(_RHYTHM)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
@@ -53,6 +55,24 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 	KC_ESC , KC_A   , KC_S   , KC_D   , KC_F   , KC_G   , KC_H   , KC_J   , KC_K   , KC_L   , KC_SCLN, KC_QUOT,
 	KC_LSFT, KC_Z   , KC_X   , KC_C   , KC_V   , KC_B   , KC_N   , KC_M   , KC_COMM, KC_DOT , KC_SLSH, KC_ENT ,
 	KC_LSFT, KC_LCTL, KC_LALT, KC_LGUI, RAISE  , KC_SPC , BSS    , LOWER  , KC_RGUI, KC_RALT, KC_RCTL, KC_RSFT
+),
+
+/* Rhythm Game Bottom Row
+ * ,-----------------------------------------------------------------------------------.
+ * | Tab  |  Q   |  W   |  F   |  P   |  B   |  J   |  L   |  U   |  Y   |  ;   | Bksp |
+ * |------+------+------+------+------+------+------+------+------+------+------+------|
+ * | Esc  |  A   |  R   |  S   |  T   |  G   |  M   |  N   |  E   |  I   |  O   |  '   |
+ * |------+------+------+------+------+------+------+------+------+------+------+------|
+ * |LShift|  Z   |  X   |  C   |  D   |  V   |  K   |  H   |  ,   |  .   |  /   |Enter |
+ * |------+------+------+------+------+------+------+------+------+------+------+------|
+ * |LShift|  Z   |  X   | LGui |Raise |Space | Bss  |Lower | RGui |  ,   |  .   |RShift|
+ * `-----------------------------------------------------------------------------------'
+ */
+[_RHYTHM] = LAYOUT_planck_grid(
+	KC_TAB , KC_Q   , KC_W   , KC_F   , KC_P   , KC_B   , KC_J   , KC_L   , KC_U   , KC_Y   , KC_SCLN, KC_BSPC,
+	KC_ESC , KC_A   , KC_R   , KC_S   , KC_T   , KC_G   , KC_M   , KC_N   , KC_E   , KC_I   , KC_O   , KC_QUOT,
+	KC_LSFT, KC_Z   , KC_X   , KC_C   , KC_D   , KC_V   , KC_K   , KC_H   , KC_COMM, KC_DOT , KC_SLSH, KC_ENT ,
+	KC_LSFT, KC_Z   , KC_X   , KC_LGUI, RAISE  , KC_SPC , BSS    , LOWER  , KC_RGUI, KC_COMM, KC_DOT , KC_RSFT
 ),
 
 /* Raise
@@ -105,7 +125,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [_ADJUST] = LAYOUT_planck_grid(
 	XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
 	XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-	XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+	XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, RHYTHM , XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
 	XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, COLEMAK, QWERTY , XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
 )
 
