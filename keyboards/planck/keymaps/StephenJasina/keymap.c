@@ -111,25 +111,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 };
 
-void bootmagic_lite(void) {
+void bootmagic_scan(void) {
 	matrix_scan();
 	wait_ms(DEBOUNCE * 2);
 	matrix_scan();
 
-	if (matrix_get_row(BOOTMAGIC_LITE_ROW) & (1 << BOOTMAGIC_LITE_COLUMN)) {
+	if (matrix_get_row(BOOTMAGIC_ROW) & (1 << BOOTMAGIC_COLUMN)) {
 		bootloader_jump();
 	}
 }
-
-// Reduce firmware size by overwriting default implementations
-#ifndef MAGIC_ENABLE
-uint16_t keycode_config(uint16_t keycode) {
-	return keycode;
-}
-uint8_t mod_config(uint8_t mod) {
-	return mod;
-}
-#endif
 
 bool bss_waiting = false;
 int bss_timer = 0;
