@@ -3,7 +3,6 @@
 enum planck_layers {
 	_COLEMAK,
 	_QWERTY,
-	_RHYTHM,
 	_LOWER,
 	_RAISE,
 	_ADJUST,
@@ -17,7 +16,6 @@ enum planck_keycodes {
 
 #define COLEMAK DF(_COLEMAK)
 #define QWERTY DF(_QWERTY)
-#define RHYTHM DF(_RHYTHM)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
@@ -57,24 +55,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 	KC_LSFT, KC_LCTL, KC_LALT, KC_LGUI, RAISE  , KC_SPC , BSS    , LOWER  , KC_RGUI, KC_RALT, KC_RCTL, KC_RSFT
 ),
 
-/* Rhythm Game Bottom Row
- * ,-----------------------------------------------------------------------------------.
- * | Tab  |  Q   |  W   |  F   |  P   |  B   |  J   |  L   |  U   |  Y   |  ;   | Bksp |
- * |------+------+------+------+------+------+------+------+------+------+------+------|
- * | Esc  |  A   |  R   |  S   |  T   |  G   |  M   |  N   |  E   |  I   |  O   |  '   |
- * |------+------+------+------+------+------+------+------+------+------+------+------|
- * |LShift|  Z   |  X   |  C   |  D   |  V   |  K   |  H   |  ,   |  .   |  /   |Enter |
- * |------+------+------+------+------+------+------+------+------+------+------+------|
- * |LShift|  Z   |  X   | LGui |Raise |Space | Bss  |Lower | RGui |  ,   |  .   |RShift|
- * `-----------------------------------------------------------------------------------'
- */
-[_RHYTHM] = LAYOUT_planck_grid(
-	KC_TAB , KC_Q   , KC_W   , KC_F   , KC_P   , KC_B   , KC_J   , KC_L   , KC_U   , KC_Y   , KC_SCLN, KC_BSPC,
-	KC_ESC , KC_A   , KC_R   , KC_S   , KC_T   , KC_G   , KC_M   , KC_N   , KC_E   , KC_I   , KC_O   , KC_QUOT,
-	KC_LSFT, KC_Z   , KC_X   , KC_C   , KC_D   , KC_V   , KC_K   , KC_H   , KC_COMM, KC_DOT , KC_SLSH, KC_ENT ,
-	KC_LSFT, KC_Z   , KC_X   , KC_LGUI, RAISE  , KC_SPC , BSS    , LOWER  , KC_RGUI, KC_COMM, KC_DOT , KC_RSFT
-),
-
 /* Raise
  * ,-----------------------------------------------------------------------------------.
  * |XXXXXX|  1   |  2   |  3   |  4   |  5   |  6   |  7   |  8   |  9   |  0   | Del  |
@@ -107,7 +87,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [_LOWER] = LAYOUT_planck_grid(
 	XXXXXXX, KC_MSTP, KC_MPRV, KC_MPLY, KC_MNXT, XXXXXXX, KC_PGUP, XXXXXXX, KC_UP  , XXXXXXX, KC_PGDN, KC_DEL ,
 	XXXXXXX, KC_BRID, KC_VOLD, KC_MUTE, KC_VOLU, KC_BRIU, KC_HOME, KC_LEFT, KC_DOWN, KC_RGHT, KC_END , XXXXXXX,
-	KC_CAPS, KC_PSCR, KC_SLCK, KC_PAUS, KC_INS , KC_NLCK, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+	KC_CAPS, KC_PSCR, KC_SCRL, KC_PAUS, KC_INS , KC_NUM , XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
 	_______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
 ),
 
@@ -125,7 +105,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [_ADJUST] = LAYOUT_planck_grid(
 	XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
 	XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-	XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, RHYTHM , XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+	XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
 	XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, COLEMAK, QWERTY , XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
 )
 
@@ -140,6 +120,16 @@ void bootmagic_lite(void) {
 		bootloader_jump();
 	}
 }
+
+// Reduce firmware size by overwriting default implementations
+#ifndef MAGIC_ENABLE
+uint16_t keycode_config(uint16_t keycode) {
+	return keycode;
+}
+uint8_t mod_config(uint8_t mod) {
+	return mod;
+}
+#endif
 
 bool bss_waiting = false;
 int bss_timer = 0;
